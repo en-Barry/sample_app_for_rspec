@@ -17,7 +17,6 @@ class TasksController < ApplicationController
 
   def create
     @task = current_user.tasks.build(task_params)
-    byebug
     if @task.save
       redirect_to @task, notice: 'Task was successfully created.'
     else
