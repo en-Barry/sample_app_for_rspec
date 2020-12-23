@@ -52,13 +52,13 @@ RSpec.describe "Tasks", type: :system do
           fill_in 'Title', with: 'test_title'
           fill_in 'Content', with: 'test_content'
           select 'doing', from: 'Status'
-          fill_in 'Deadline', with: DateTime.new(2020, 6, 1, 10, 30)
+          fill_in 'Deadline', with: '002020-12-25-10-30'
           click_button 'Create Task'
           expect(current_path).to eq '/tasks/1'
           expect(page).to have_content 'Title: test_title'
           expect(page).to have_content 'Content: test_content'
           expect(page).to have_content 'Status: doing'
-          expect(page).to have_content 'Deadline: 2020/6/1 10:30' 
+          expect(page).to have_content 'Deadline: 2020/12/25 10:30' 
         end
       end
       context 'タイトルが未入力' do
@@ -66,7 +66,7 @@ RSpec.describe "Tasks", type: :system do
           fill_in 'Title', with: nil
           fill_in 'Content', with: 'test_content'
           select 'doing', from: 'Status'
-          fill_in 'Deadline', with: DateTime.new(2020, 6, 1, 10, 30)
+          fill_in 'Deadline', with: '002020-12-25-10-30'
           click_button 'Create Task'
           expect(current_path).to eq tasks_path
           expect(page).to have_content "Title can't be blank"
@@ -77,7 +77,6 @@ RSpec.describe "Tasks", type: :system do
           fill_in 'Title', with: task.title
           fill_in 'Content', with: 'test_content'
           select 'doing', from: 'Status'
-          fill_in 'Deadline', with: DateTime.new(2020, 6, 1, 10, 30)
           click_button 'Create Task'
           expect(current_path).to eq tasks_path
           expect(page).to have_content "Title has already been taken"
@@ -93,7 +92,6 @@ RSpec.describe "Tasks", type: :system do
           fill_in 'Title', with: 'update_title'
           fill_in 'Content', with: 'update_content'
           select 'done', from: 'Status'
-          fill_in 'Deadline', with: DateTime.new(2020, 6, 1, 10, 30)
           click_button 'Update Task'
           expect(current_path).to eq '/tasks/1'
           expect(page).to have_content 'Task was successfully updated.'
@@ -106,7 +104,6 @@ RSpec.describe "Tasks", type: :system do
           fill_in 'Title', with: nil
           fill_in 'Content', with: 'update_content'
           select 'doing', from: 'Status'
-          fill_in 'Deadline', with: DateTime.new(2020, 6, 1, 10, 30)
           click_button 'Update Task'
           expect(current_path).to eq task_path(task)
           expect(page).to have_content '1 error prohibited this task from being saved'
@@ -118,7 +115,6 @@ RSpec.describe "Tasks", type: :system do
           fill_in 'Title', with: other_task.title
           fill_in 'Content', with: 'update_content'
           select 'doing', from: 'Status'
-          fill_in 'Deadline', with: DateTime.new(2020, 6, 1, 10, 30)
           click_button 'Update Task'
           expect(current_path).to eq task_path(task)
           expect(page).to have_content '1 error prohibited this task from being saved'
